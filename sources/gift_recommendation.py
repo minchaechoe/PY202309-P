@@ -3,27 +3,27 @@ import random
 
 class MbtiGift:
     def __init__(self):
-        print("This is a gift recommending program depending on mbti.")
+        print("******** This is a gift recommending program depending on mbti ********")
+
         while True:
-            print("\ncategory : 도서 패션 상품권 코스메틱 전자기기 문구 리빙 건강")
-            print("---------choose option---------")
-            print("1. Get gift recommendation")
-            print("2. Enter the desired gift")
-            # add 3rd function "getting a gift card message for random"
-            print("3. Get a gift card message")
-            print("4. Quit")
+            print("\n***********************************************************************")
+            print("*     category: 도서/패션/상품권/코스메틱/전자기기/문구/리빙/건강     *")
+            print("* ----------------------- << choose option >> ----------------------- *")
+            print("*                                                                     *")
+            print("* (1) Get gift recommendation | (2) Enter the desired gift | (3) Quit *")
+            print("*                                                                     *")
+            print("***********************************************************************")
             option = int(input("enter the number of your option --> "))
 
             if option == 1:
-                print("recommended gift is", self.output_gift())
+                self.output_gift()
             elif option == 2:
                 self.input_gift()
             elif option == 3:
-                self.output_msg()
-            elif option == 4:
+                print("프로그램을 종료합니다.")
                 break
             else:
-                print("Wrong input. Please input 1~4.")
+                print("Wrong input. Please input 1~3.")
 
     def  output_gift(self):
         fp_e = open("present/present_e.txt", "r+", encoding="utf8")
@@ -71,7 +71,9 @@ class MbtiGift:
         # print(sorted_freq)
         # print(sorted_freq[-3:])
         recommended_gift = random.choice(sorted_freq[-3:])[0]
-        return recommended_gift
+        print("-----------------------------------------------------------------------")
+        print("recommended gift: ", recommended_gift)
+        self.output_msg(gift_category)
 
 
     def input_gift(self):
@@ -114,8 +116,23 @@ class MbtiGift:
         fp_p_w.close()
         fp_j_w.close()
 
-    def output_msg(self):
-        pass
+    def output_msg(self, gift_category):
+        category_messages = {
+            "도서": "기억에 오래 남는 책이 되길..",
+            "패션": "잘 어울릴 것 같아 선물합니다!",
+            "상품권": "필요한 곳에 유용히 잘 쓰세요.",
+            "코스메틱": "향기로운 일상을 위한 선물!",
+            "전자기기": "바쁜 일상에 함께 하세요.",
+            "문구": "생각과 기억을 기록하세요.",
+            "리빙": "보금자리를 위한 선물을 준비했어요.",
+            "건강": "건강이 최고!"
+        }
+
+        if gift_category in category_messages:
+            print("gift card message: ", category_messages[gift_category])
+        else:
+            print("카테고리를 찾을 수 없습니다. 올바른 카테고리를 입력하세요.")
+
 
     def enter_mbti(self):
         while True:
